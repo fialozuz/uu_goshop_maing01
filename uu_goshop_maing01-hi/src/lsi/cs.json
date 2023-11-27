@@ -30,7 +30,8 @@
     "initialize": "Inicializovat"
   },
   "Menu": {
-    "home": "Vítejte",
+    "home": "Domovská stránka - moje seznamy",
+    "shoplist":"Detail seznamu",
     "about": "O aplikaci"
   }
 }
