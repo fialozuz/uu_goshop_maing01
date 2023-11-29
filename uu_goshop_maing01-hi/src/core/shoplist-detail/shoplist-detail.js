@@ -37,7 +37,7 @@ const ShoplistDetail = createVisualComponent({
 
   //@@viewOn:defaultProps
   defaultProps: {
-    data: mockList
+    data: mockList[1]
   },
   //@@viewOff:defaultProps
 
