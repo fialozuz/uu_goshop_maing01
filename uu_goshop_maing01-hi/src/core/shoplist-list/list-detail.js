@@ -4,6 +4,7 @@ import Config from "./config/config.js";
 import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesControls from "uu5tilesg02-controls";
 import Uu5TilesElements from "uu5tilesg02-elements";
+import { useDarkmodeContext } from "../context/darkmode-context.js";
 
 import Tile from "../../bricks/tile.js";
 import Uu5Elements from "uu5g05-elements";
@@ -41,6 +42,7 @@ const ListDetail = createVisualComponent({
     //@@viewOff:private
 
     //@@viewOn:interface
+    const [isDark] = useDarkmodeContext();
     //@@viewOff:interface
 
     //@@viewOn:render
@@ -68,11 +70,11 @@ const ListDetail = createVisualComponent({
               <Uu5TilesControls.Counter />
             </div>
           ) : null}
-            <Uu5TilesElements.Grid tileMinWidth={300} tileMaxWidth={350} >
+            <Uu5TilesElements.Grid significance={isDark ? "highlighted" : "distinct"} tileMinWidth={300} tileMaxWidth={350}>
                 {Tile}
               </Uu5TilesElements.Grid>
             </Uu5Tiles.ControllerProvider>
-            <Uu5Elements.Pagination justifzItem="center"></Uu5Elements.Pagination>
+            <Uu5Elements.Pagination justifyItem="center" count={4}></Uu5Elements.Pagination>
         </div>
       </div>
     )

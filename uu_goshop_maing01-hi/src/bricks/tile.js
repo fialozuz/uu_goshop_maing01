@@ -29,7 +29,7 @@ const Tile = createVisualComponent({
 
     //@@viewOn:render
     return (
-      <Uu5TilesElements.Tile  {...otherProps} onClick={() => setRoute("shopList")} headerOverlap>
+      <Uu5TilesElements.Tile  {...otherProps} height={370} onClick={() => setRoute("shopList")} headerOverlap>
         {({ padding }) => {
           return (
             <>

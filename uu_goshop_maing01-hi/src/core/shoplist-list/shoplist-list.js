@@ -2,6 +2,7 @@
 import { createVisualComponent, Utils, useState } from "uu5g05";
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
+import { useDarkmodeContext } from "../context/darkmode-context.js";
 
 import ListDetail from "./list-detail.js";
 import { mockList } from "../../../mock/data/mockList.js";
@@ -56,7 +57,8 @@ const ShoplistList = createVisualComponent({
     });
     
     const [filterOpen, setFilterOpen] = useState(false);
-    const [archivatedOpen, setArchivatedOpen] = useState(false); 
+    const [archivatedOpen, setArchivatedOpen] = useState(false);
+    const [isDark] = useDarkmodeContext() 
 
     /* function handleArchivList(idList) {
       if (idList) {
@@ -73,9 +75,9 @@ const ShoplistList = createVisualComponent({
       <Uu5Elements.Grid templateColumns="100vw">
         
         <Uu5Elements.Grid templateColumns="auto 200px" alignItems= "center" >
-          <Uu5Elements.Line style={{marginLeft: "25px"}}/>
+          <Uu5Elements.Line style={{marginLeft: "25px"}} significance= {isDark?"subdued":undefined}/>
           
-          <Uu5Elements.Button style={{marginRight: "25px"}} id="ahojk" icon={filterOpen===true?"mdi-chevron-up":"mdi-chevron-down"} open={filterOpen} onClick={() => setFilterOpen(!filterOpen)}>Filter</Uu5Elements.Button>
+          <Uu5Elements.Button style={{marginRight: "25px"}} id="ahojk" icon={filterOpen===true?"mdi-chevron-up":"mdi-chevron-down"} significance= {isDark?"highlighted":undefined} open={filterOpen} onClick={() => setFilterOpen(!filterOpen)}>Filter</Uu5Elements.Button>
         </Uu5Elements.Grid>
 
         <ListDetail
@@ -88,9 +90,9 @@ const ShoplistList = createVisualComponent({
         {archivatedLists.length ? (
             <div>
               <Uu5Elements.Grid templateColumns="auto 200px" alignItems= "center" >
-                <Uu5Elements.Line style={{marginLeft: "25px"}}/>
+                <Uu5Elements.Line style={{marginLeft: "25px"}} significance= {isDark?"subdued":undefined}/>
                 
-                <Uu5Elements.Button style={{marginRight: "25px"}} id="archiv" icon={archivatedOpen===true?"mdi-chevron-up":"mdi-chevron-down"} open={archivatedOpen} onClick={() => setArchivatedOpen(!archivatedOpen)}>Archivated</Uu5Elements.Button>
+                <Uu5Elements.Button style={{marginRight: "25px"}} id="archiv" icon={archivatedOpen===true?"mdi-chevron-up":"mdi-chevron-down"} significance= {isDark?"highlighted":undefined} open={archivatedOpen} onClick={() => setArchivatedOpen(!archivatedOpen)}>Archivated</Uu5Elements.Button>
               </Uu5Elements.Grid> 
             </div>
           ) : null}

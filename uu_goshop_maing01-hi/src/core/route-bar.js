@@ -1,12 +1,13 @@
 //@@viewOn:imports
-import { createVisualComponent, Lsi, useRoute, useState } from "uu5g05";
+import { createVisualComponent, Lsi, useRoute, useState, useSession } from "uu5g05";
 import Plus4U5App from "uu_plus4u5g02-app";
 import Uu5Elements from "uu5g05-elements";
+import { Icon } from "uu5g05-elements";
+
+import { useDarkmodeContext } from "./context/darkmode-context.js";
 
 import Config from "./config/config.js";
 import importLsi from "../lsi/import-lsi.js";
-//import Logo from "../../mock/uufriends.png"
-import { Button } from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 //@@viewOff:imports
 
@@ -35,6 +36,8 @@ const RouteBar = createVisualComponent({
   render() {
     //@@viewOn:private
     const [, setRoute] = useRoute();
+    const [isDark, setIsDark] = useDarkmodeContext();
+    const { identity } = useSession();
 
     const TABS = [
       { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
@@ -52,6 +55,7 @@ const RouteBar = createVisualComponent({
     //@@viewOn:render
     return <Uu5Elements.Grid justifyItems="normal" height={250} templateColumns="1fr 3fr 1fr" style={{gap:"0px"}}>
             <Uu5Elements.Drawer
+              significance = {isDark?"subdued":undefined}
               sizeOf="elevated"
               height="100%"
                 open={menuOpen}
@@ -59,9 +63,11 @@ const RouteBar = createVisualComponent({
                 content={(
                   <Uu5Elements.MenuList
                     itemBorderRadius="moderate"
-                    itemList={[{ children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
+                    itemList={[{ children: isDark ? <Icon icon="uugdsstencil-weather-sun">LightMode</Icon> : <Icon icon="uugdsstencil-weather-moon">DarkMode</Icon>, onClick: setIsDark },
+                    { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
                     { children: <Lsi import={importLsi} path={["Menu", "shoplist"]} />, onClick: () => setRoute("shopList") },
-                    { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about")},]}
+                    { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about")},
+                    ]}
                   />
                 )}
               >
@@ -75,8 +81,8 @@ const RouteBar = createVisualComponent({
                 />
               </div>
             </Uu5Elements.Drawer>  
-            <img src="../../mock/goshopPlaceholder.png" alt="Group backgroud" onClick={() => setRoute("home")} style={{borderRadius: "10px", objectFit: "contain"}} width="100%" height={250}/>
-            <Plus4U5Elements.PersonPhoto style={{margin:"20px", width:"60px", height:"60px", borderRadius: "30px"}}></Plus4U5Elements.PersonPhoto>
+            <img src={isDark?"../../mock/goshop-white.png":"../../mock/goshop-black.png"} alt="GoShop Logo" onClick={() => setRoute("home")} style={{borderRadius: "10px", objectFit: "contain", marginTop: "15px", marginBottom: "15px"}} width="100%" height={250}/>
+            <Plus4U5Elements.PersonPhoto identity={identity} justifyItems="right" style={{margin:"20px", width:"60px", height:"60px", borderRadius: "30px"}}></Plus4U5Elements.PersonPhoto>
           </Uu5Elements.Grid>
     //@@viewOff:render
   },

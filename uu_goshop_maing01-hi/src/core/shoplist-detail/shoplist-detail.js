@@ -4,6 +4,8 @@ import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 import TextInput from "./text-input.js";
 
+import { useDarkmodeContext } from "../context/darkmode-context.js";
+
 import { mockList } from "../../../mock/data/mockList.js";
 import ItemList from "./item-list.js";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
@@ -44,6 +46,8 @@ const ShoplistDetail = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { data } = props;
+
+    const [isDark] = useDarkmodeContext();
 
     const [listName,  setName ] = useState(data.listName);
     //const [idMembers, setIdMembers] = useState(data.idMembers);
@@ -103,7 +107,7 @@ const ShoplistDetail = createVisualComponent({
     //@@viewOn:render
 
     return (
-      <Uu5Elements.Box width="75%" height="auto" borderRadius="expressive" significance="distinct">
+      <Uu5Elements.Box width="75%" height="auto" borderRadius="expressive" significance={isDark ? "highlighted" : "distinct"}>
         <Uu5Elements.Grid templateColumns="10% auto 10%" style={{gap:"0px"}}>
           <div></div>
           <Uu5Elements.Grid templateColumns=" auto 50px 50px">

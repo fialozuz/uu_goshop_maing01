@@ -5,6 +5,7 @@ import Uu5Elements from "uu5g05-elements";
 
 import RouteBar from "../core/route-bar.js";
 import ShoplistDetail from "../core/shoplist-detail/shoplist-detail.js";
+import { useDarkmodeContext } from "../core/context/darkmode-context.js";
 
 
 //@@viewOff:imports
@@ -46,12 +47,13 @@ const ShopList = createVisualComponent({
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ShopList);
+    const [isDark] = useDarkmodeContext();
 
     return currentNestingLevel ? (
-      <div {...attrs}>
-        <RouteBar />
+      <div {...attrs} style={{background: isDark ? "black" : "white"}}>
+        <RouteBar propos={isDark} />
         <Uu5Elements.Grid justifyItems="center">
-          <ShoplistDetail/>
+          <ShoplistDetail propos={isDark}/>
           <dr></dr>
         </Uu5Elements.Grid>
       </div>
